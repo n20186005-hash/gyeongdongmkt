@@ -1,9 +1,10 @@
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = new URL('../dist/', import.meta.url);
+const root = fileURLToPath(new URL('../dist/', import.meta.url));
 const forbidden = ['example.com', 'localhost', 'chrome-extension://'];
-const textExt = new Set(['.html', '.xml', '.js', '.mjs', '.css', '.json', '.txt', '.map']);
+const textExt = new Set(['.html', '.xml', '.css', '.json', '.txt']);
 const files = [];
 
 async function walk(dir) {
@@ -15,7 +16,7 @@ async function walk(dir) {
   }
 }
 
-await walk(root.pathname);
+await walk(root);
 for (const file of files) {
   const ext = file.slice(file.lastIndexOf('.'));
   if (!textExt.has(ext)) continue;
