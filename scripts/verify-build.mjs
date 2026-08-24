@@ -1,11 +1,17 @@
 import { readdir, readFile, stat } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../dist/', import.meta.url));
 const forbidden = ['example.com', 'localhost', 'chrome-extension://'];
 const textExt = new Set(['.html', '.xml', '.css', '.json', '.txt']);
 const files = [];
+let checkedFiles = 0;
+
+function isPublicArtifact(file) {
+  const rel = relative(root, file);
+  return rel && !rel.startsWith(`server${sep}`);
+}
 
 async function walk(dir) {
   for (const entry of await readdir(dir)) {
@@ -18,8 +24,10 @@ async function walk(dir) {
 
 await walk(root);
 for (const file of files) {
+  if (!isPublicArtifact(file)) continue;
   const ext = file.slice(file.lastIndexOf('.'));
   if (!textExt.has(ext)) continue;
+  checkedFiles += 1;
   const text = await readFile(file, 'utf8');
   for (const needle of forbidden) {
     if (text.includes(needle)) throw new Error(`금지 문자열 발견: ${needle} (${file})`);
@@ -33,8 +41,8 @@ for (const file of files) {
   }
 }
 
-const hasSitemap = files.some((f) => /sitemap.*\.xml$/i.test(f));
+const hasSitemap = files.some((f) => isPublicArtifact(f) && /sitemap.*\.xml$/i.test(f));
 if (!process.env.SITE_URL?.trim() && hasSitemap) {
   throw new Error('SITE_URL이 비어 있는데 sitemap이 생성되었습니다.');
 }
-console.log(`빌드 검증 완료: ${files.length}개 파일, 금지 문자열 없음.`);
+console.log(`빌드 검증 완료: 공개 텍스트 산출물 ${checkedFiles}개 파일, 금지 문자열 없음.`);
