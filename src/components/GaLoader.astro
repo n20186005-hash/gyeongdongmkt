@@ -1,0 +1,16 @@
+<script is:inline define:vars={{ gaId: 'G-HXM22WWPKP' }}>
+  (() => {
+    const KEY = 'gyeongdong-cookie-preferences-v1';
+    let prefs = null;
+    try { prefs = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch {}
+    if (!prefs?.analytics) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', gaId, { anonymize_ip: true });
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+    document.head.appendChild(script);
+  })();
+</script>

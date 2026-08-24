@@ -1,0 +1,26 @@
+---
+import Logo from './Logo.astro';
+---
+<footer class="footer">
+  <div class="shell footer-grid">
+    <div>
+      <Logo light />
+      <p class="footer-intro">전통시장과 지역 문화의 맥락을 여행자가 이해할 수 있도록 공개 자료를 정리한 독립 비영리 정보 프로젝트입니다.</p>
+    </div>
+    <div class="footer-links" aria-label="법적 안내">
+      <a href="/privacy/">개인정보처리방침</a>
+      <a href="/terms/">이용약관</a>
+      <a href="/cookies/">쿠키 설정</a>
+      <a href="/#sources">자료 출처</a>
+    </div>
+  </div>
+  <div class="shell disclaimer">
+    <p>본 웹사이트는 독립 비영리 관광 정보 안내 프로젝트이며, 정부 기관 또는 공식 조직과 아무런 소속 관계가 없습니다.</p>
+    <p>본 사이트의 관광 정보는 서울특별시청, 동대문구청, 서울관광재단, 한국관광공사 등 공개 자료를 참고·대조했으며 상업적 추천을 포함하지 않습니다.</p>
+    <p>이미지 저작권: 본 사이트에 표시된 모든 이미지의 저작권은 원 촬영자 및 권리자에게 있습니다.</p>
+    <p>© 2026 경동시장 관광정보 가이드. 모든 권리 보유.</p>
+  </div>
+</footer>
+<style>
+.footer{background:#17211d;color:#edf1e7;padding:4rem 0 2.25rem}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:4rem;padding-bottom:3rem}.footer-intro{max-width:34rem;color:#bac4be;margin-top:1.4rem}.footer-links{display:grid;grid-template-columns:1fr 1fr;align-content:start;gap:.9rem;font-weight:700}.footer-links a{border-bottom:1px solid rgba(255,255,255,.13);padding-bottom:.75rem}.disclaimer{border-top:1px solid rgba(255,255,255,.14);padding-top:1.7rem;color:#9eaba4;font-size:.77rem;line-height:1.7}.disclaimer p{margin:.3rem 0}@media(max-width:700px){.footer-grid{grid-template-columns:1fr;gap:2rem}.footer-links{grid-template-columns:1fr}}
+</style>

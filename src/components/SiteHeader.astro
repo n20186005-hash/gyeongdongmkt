@@ -1,0 +1,19 @@
+---
+import Logo from './Logo.astro';
+---
+<header class="site-header">
+  <div class="shell header-inner">
+    <Logo />
+    <nav aria-label="주요 메뉴">
+      <a href="/#story">시장 이야기</a>
+      <a href="/#visit">방문 정보</a>
+      <a href="/#transport">교통</a>
+      <a href="/#nearby">주변</a>
+      <a href="/#faq">자주 묻는 질문</a>
+    </nav>
+    <a class="map-link" href="/#map">지도 보기</a>
+  </div>
+</header>
+<style>
+.site-header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,#f5f0e4 91%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid rgba(23,33,29,.1)}.header-inner{height:78px;display:flex;align-items:center;justify-content:space-between;gap:1rem}.header-inner nav{display:flex;gap:1.55rem;font-size:.88rem;font-weight:700}.header-inner nav a:hover{color:#b73b2e}.map-link{padding:.65rem 1rem;background:#235d48;color:white;border-radius:999px;font-size:.85rem;font-weight:800}@media(max-width:900px){.header-inner nav{display:none}.site-header .header-inner{height:68px}}
+</style>

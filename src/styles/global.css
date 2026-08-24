@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #17211d;
+  --paper: #f5f0e4;
+  --paper-deep: #e9dfcc;
+  --leaf: #235d48;
+  --leaf-dark: #173e32;
+  --market-red: #b73b2e;
+  --gold: #bf8a36;
+  --cream: #fffaf0;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--paper); }
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 15% 0%, rgba(191,138,54,.10), transparent 24rem),
+    var(--paper);
+  font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
+  line-height: 1.65;
+  word-break: keep-all;
+}
+::selection { background: #b73b2e; color: #fff; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button, input { font: inherit; }
+
+.skip-link {
+  position: fixed; left: 1rem; top: -5rem; z-index: 100;
+  background: var(--ink); color: white; padding: .7rem 1rem; border-radius: 999px;
+}
+.skip-link:focus { top: 1rem; }
+
+.shell { width: min(1180px, calc(100% - 2rem)); margin-inline: auto; }
+.section { padding: clamp(4.5rem, 8vw, 8rem) 0; }
+.section-kicker {
+  font-size: .78rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--market-red); margin-bottom: .9rem;
+}
+.display {
+  font-family: "Iropke Batang", "Noto Serif KR", "Nanum Myeongjo", Georgia, serif;
+  font-weight: 700; letter-spacing: -.045em; line-height: 1.08;
+}
+.section-title { font-size: clamp(2.1rem, 5vw, 4.6rem); max-width: 17ch; margin: 0; }
+.section-lead { max-width: 720px; font-size: clamp(1.05rem, 1.6vw, 1.25rem); color: #4e5954; }
+.rule { height: 1px; background: rgba(23,33,29,.18); }
+
+.paper-card {
+  background: rgba(255,250,240,.82);
+  border: 1px solid rgba(23,33,29,.14);
+  box-shadow: 0 20px 60px rgba(43,37,27,.08);
+}
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: .55rem;
+  font-size: .8rem; font-weight: 800; letter-spacing: .08em;
+}
+.eyebrow::before { content: ""; width: 2.3rem; height: 2px; background: currentColor; }
+
+.prose-ko h2 { font-family: "Iropke Batang", "Noto Serif KR", serif; font-size: clamp(1.8rem,4vw,3rem); margin-top: 3rem; line-height: 1.25; }
+.prose-ko h3 { font-size: 1.2rem; margin-top: 2rem; }
+.prose-ko p, .prose-ko li { color: #45504b; }
+.prose-ko ul { padding-left: 1.25rem; }
+.prose-ko a { text-decoration: underline; text-underline-offset: 3px; }
+
+.focus-ring:focus-visible, a:focus-visible, button:focus-visible {
+  outline: 3px solid #da8f50; outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  body { word-break: normal; }
+  .shell { width: min(100% - 1.25rem, 1180px); }
+}
