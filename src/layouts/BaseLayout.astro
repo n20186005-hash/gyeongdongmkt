@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { SITE_NAME } from '../data/site';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import GaLoader from '../components/GaLoader.astro';
@@ -26,6 +27,7 @@ const ogImage = Astro.site ? new URL(image, Astro.site).href : image;
     {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ko_KR" />
+    <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />

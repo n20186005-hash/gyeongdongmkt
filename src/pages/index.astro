@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_NAME } from '../data/site';
 
-const pageTitle = '경동시장 관광정보 가이드 | 서울 동대문 전통시장 문화와 방문 안내';
-const description = '1960년 개설된 서울 경동시장의 역사, 약재와 농수산물 시장 문화, 교통·주차·화장실·비용·주변 볼거리까지 비영리 관점에서 정리한 방문 가이드.';
+const pageTitle = `${SITE_NAME} | 영업시간·휴무일·제기동역 위치·시장 지도`;
+const description = '경동시장(서울 동대문구 제기동) 영업시간과 휴무일, 지하철 제기동역 교통편, 시장 지도와 주차·화장실 정보를 비영리 관점에서 정리한 방문 가이드.';
 const siteUrl = Astro.site ? new URL('/', Astro.site).href : undefined;
 const imageUrl = Astro.site ? new URL('/images/gyeongdong-entrance.webp', Astro.site).href : undefined;
 

@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE_NAME } from '../../data/site';
 ---
-<BaseLayout title="이용약관 | 경동시장 관광정보 가이드" description="경동시장 관광정보 가이드의 독립성, 정보 정확성, 콘텐츠 이용과 책임 범위에 관한 이용약관입니다.">
+<BaseLayout title={`이용약관 | ${SITE_NAME}`} description="경동시장 관광정보 가이드의 독립성, 정보 정확성, 콘텐츠 이용과 책임 범위에 관한 이용약관입니다.">
   <section class="legal-hero"><div class="shell"><p class="section-kicker">서비스 이용 안내</p><h1 class="display">이용약관</h1><p>최종 업데이트: 2026년 8월</p></div></section>
   <section class="section"><article class="shell legal prose-ko">
     <p class="lead">경동시장 관광정보 가이드에 접속하고 이용함으로써 이용자는 아래 조건에 동의합니다. 본 사이트는 여행 결정을 돕는 참고 자료이며, 경동시장·서울특별시·동대문구·한국관광공사 또는 어떠한 상업 운영자도 대리하지 않습니다.</p>
