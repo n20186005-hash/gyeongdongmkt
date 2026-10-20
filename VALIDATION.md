@@ -1,34 +1,15 @@
-# 검증 기록
+# 로컬 검증 범위
 
-## 정적 프로젝트 감사
+2026년 10월 20일 검증 기준:
 
-다음 항목은 프로젝트 파일을 직접 검사해 통과했습니다.
+- Node 24.19.0 / pnpm 11.22.0, 고정 버전과 잠금 파일 사용
+- `pnpm check`: 오류·경고·힌트 0
+- `pnpm build`: 기존 한국어 4개 경로와 404의 정적 HTML 생성, 후속 빌드 검사 실행
+- 홈페이지 FAQ 7개는 화면과 JSON-LD 동일 배열, 주소·위치와 출처별 시간 차이 반영
+- 도메인·canonical·OG·ko alternate·홈페이지 sitemap, 로컬 링크와 이미지 참조 검사
+- HTTP/www 경로·쿼리 보존 301, 실제 404/noindex와 보안 헤더를 Worker 단위 및 로컬 HTTP로 검사
+- 분석 미동의·손상 데이터·이전 허용 철회·읽기 가능/쓰기 실패·탭 이동/새로고침·양 저장소 실패 범위 메시지 검사
+- 현재 사진은 Commons 원본 체크섬과 일치하는 원본으로부터 변환하며 작가·촬영일·라이선스·이전 사진 교체 사유 기록
+- 전체 공개 텍스트와 빌드 결과, 제출 차이의 개인정보·자격증명 검사
 
-- package.json 직접 의존성에 `latest`, `*`, `^`, `~` 등 부동 버전 없음
-- `packageManager` = `pnpm@11.22.0`
-- Node.js = `24.19.0` (`engines`, `.node-version` 일치)
-- TypeScript 6.0.3 / @astrojs/check 0.9.10 호환 범위 확인
-- `pnpm-workspace.yaml`의 `packages`가 `['.']`로 비어 있지 않음
-- pnpm 11 빌드 승인: `esbuild`, `sharp`, `workerd`만 명시적으로 허용
-- `SITE_URL` 미설정 시 sitemap 통합 비활성화
-- Google 지도 언어·지역: `ko` / `KR`
-- 개인정보처리방침·이용약관·쿠키 설정은 각각 독립 경로
-- GA4는 분석 동의 전 로드되지 않음
-- logo / favicon(16·32·180·SVG) / 현장 사진 로컬 포함
-- 실제 앱 소스에서 `example.com`, `localhost`, `chrome-extension://` 미검출
-- Baguio/중국어 템플릿 문구 혼입 미검출
-
-## 이 실행 환경의 제한
-
-요청한 최종 명령 `CI=1 corepack pnpm install --frozen-lockfile`도 실제로 시도했으나, 현재 작업 컨테이너가 `registry.npmjs.org:443`에 대한 외부 연결을 차단해 pnpm 자체 다운로드 단계에서 `ECONNREFUSED`가 발생했습니다. 따라서 이 환경에서는 `pnpm check`와 `pnpm build`까지 실행할 수 없었으며, 실행하지 않은 검사를 통과했다고 표시하지 않습니다.
-
-인터넷 접속이 가능한 깨끗한 Node.js 24.19.0 환경에서 아래 순서로 최종 재현 검증하세요.
-
-```bash
-rm -rf node_modules
-CI=1 corepack pnpm install --frozen-lockfile
-pnpm check
-pnpm build
-```
-
-`pnpm build`에는 `scripts/verify-build.mjs`가 포함되어 있어 빌드 산출물의 금지 문자열, sitemap HTTPS URL, 임의 lastmod, SITE_URL 미설정 상태의 잘못된 sitemap 생성을 자동 검사합니다.
+로컬 소스·HTML·HTTP·VM 검사는 정식 브라우저 시각 검사를 대신하지 않습니다. 공식 모바일 시각 및 실제 도메인/Cloudflare 배포 검증은 게시 담당자가 별도로 수행해야 합니다. 이 문서는 사이트가 배포되었다는 확인이 아닙니다.

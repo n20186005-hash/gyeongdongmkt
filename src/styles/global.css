@@ -74,3 +74,19 @@ button, input { font: inherit; }
   body { word-break: normal; }
   .shell { width: min(100% - 1.25rem, 1180px); }
 }
+
+body {overflow-wrap:anywhere;}
+a,button,summary,label {touch-action:manipulation;}
+button {min-height:44px;cursor:pointer;}
+.legal-hero {padding:4rem 0 2.5rem;background:#173e32;color:white;}
+.legal-hero h1 {font-size:clamp(2.2rem,7vw,5rem);overflow-wrap:anywhere;}
+.legal {max-width:880px;}
+.consent-card {background:#fffaf0;padding:1.5rem;margin-block:2rem;border:1px solid #173e3240;}
+.consent-control {display:flex;align-items:center;gap:1rem;min-height:48px;}
+.consent-control input {width:24px;height:24px;accent-color:#235d48;}
+.consent-actions {display:flex;flex-wrap:wrap;gap:1rem;margin-block:1rem;}
+.consent-actions button {padding:.8rem 1.3rem;border:1px solid #235d48;background:#235d48;color:white;border-radius:2rem;}
+.photo-note {font-size:.82rem;line-height:1.8;padding-block:1rem;}
+.photo-note a,figcaption a {text-decoration:underline;text-underline-offset:3px;}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+.footer-links a,.map-link {min-height:44px;display:inline-flex;align-items:center;}

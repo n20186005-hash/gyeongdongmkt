@@ -1,300 +1,35 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE_NAME } from '../data/site';
-
-const pageTitle = `${SITE_NAME} | 영업시간·휴무일·제기동역 위치·시장 지도`;
-const description = '경동시장(서울 동대문구 제기동) 영업시간과 휴무일, 지하철 제기동역 교통편, 시장 지도와 주차·화장실 정보를 비영리 관점에서 정리한 방문 가이드.';
-const siteUrl = Astro.site ? new URL('/', Astro.site).href : undefined;
-const imageUrl = Astro.site ? new URL('/images/gyeongdong-entrance.webp', Astro.site).href : undefined;
-
 const faq = [
-  ['경동시장 입장료가 있나요?', '시장 자체를 둘러보는 데 별도의 입장권은 필요하지 않습니다. 상품 구매, 식음료 이용, 일부 체험·문화 공간 이용 비용은 각각 다를 수 있습니다.'],
-  ['언제 방문하면 가장 둘러보기 좋나요?', '점포가 충분히 문을 연 오전 중반부터 오후 이른 시간대가 시장의 활기를 보기 좋습니다. 전통시장은 점포별 영업시간과 휴무가 다르므로 특정 점포가 목적이라면 방문 전에 별도 확인이 필요합니다.'],
-  ['시장 전체를 보는 데 얼마나 걸리나요?', '핵심 골목과 시장 분위기를 보는 데는 약 1시간 30분, 서울약령시 권역과 문화 공간까지 함께 보면 2~3시간 정도를 잡는 편이 여유롭습니다.'],
-  ['대중교통으로 가기 편한가요?', '지하철 1호선 제기동역에서 도보로 접근하기 쉽습니다. 버스 정류장도 시장과 서울약령시 권역 주변에 여러 곳 있어 대중교통 이용이 편리한 편입니다.'],
-  ['주차가 가능한가요?', '시장 권역에 유료 주차 시설이 있으나 전통시장 특성상 혼잡할 수 있습니다. 요금과 운영시간은 변동 가능성이 있어 현장 안내를 우선 확인하고, 가능하면 대중교통 이용을 권합니다.'],
-  ['화장실과 무장애 편의시설은 어떤가요?', '시장 건물과 주변 공용시설에 화장실이 있으나 구역별 접근성은 다를 수 있습니다. 한국관광공사 공개 무장애 정보도 등록 시점에 따라 항목이 다르게 표시되는 경우가 있어, 휠체어·유아차 이용자는 현장 안내와 최신 공공 정보를 함께 확인하는 것이 안전합니다.'],
-  ['외국인도 한약재를 구매할 수 있나요?', '일반적인 식품·차·건재류는 구매할 수 있지만, 의약품이나 검역 대상 식물성 제품을 해외로 반출할 때는 도착 국가의 통관·검역 규정이 적용될 수 있습니다. 구매 전 품목의 반입 가능 여부를 확인하세요.']
+ ['경동시장은 어디에 있나요?', '서울 동대문구 고산자로36길 3 일대입니다. 2026년 10월 20일 확인한 Google Maps 장소 핀은 37.57973, 127.03854입니다. 시장권에는 여러 건물과 점포가 있으므로 목적 점포의 건물과 출입구를 별도로 확인하세요.'],
+ ['영업시간은 08시인가요, 09시인가요?', '2026년 10월 20일 확인한 Google Maps는 매일 09:00–18:00로 표시했습니다. Visit Seoul의 2026년 9월 10일 수정 안내는 08:00–18:00와 격주 일요일·추석 휴무를 기재합니다. 서로 다른 안내이므로 모든 점포의 공통 시간표로 단정하지 말고 목적 점포에 확인하세요.'],
+ ['일요일과 공휴일에도 모두 문을 여나요?', '그렇게 보장할 수 없습니다. Visit Seoul에는 격주 일요일과 추석 휴무가 안내되어 있지만 어느 일요일인지 이 자료만으로 특정하지 않습니다. Google Maps의 일별 표기만으로 휴일 영업을 판단하지 말고 시장 건물과 점포에 방문 날짜를 확인하세요.'],
+ ['입장료와 구매 비용은 어떻게 확인하나요?', '이 가이드는 전체 시장의 무료 입장이나 별도 공간 이용료를 보장하지 않습니다. 상품, 식사, 주차, 체험 또는 문화 공간의 비용과 포함 범위는 해당 운영자에게 각각 확인하세요.'],
+ ['제기동역에서 어떻게 가나요?', 'Visit Seoul은 지하철 1호선 제기동역 2번 출구를 접근 지점으로 안내합니다. 현재 출구 운영, 엘리베이터와 목적 점포까지의 동선은 출발 전에 교통 운영기관 안내와 현장 표지로 확인하세요. 고정 도보 시간이나 모든 구간의 무장애 접근을 보장하지 않습니다.'],
+ ['화장실·주차·무장애 이동은 가능한가요?', '2026년 10월 20일 Google Maps는 접근 가능한 입구 표시를 제공하지만 이는 전체 시장의 이동 경로를 실측한 결과가 아닙니다. 화장실, 주차, 경사로, 엘리베이터의 위치와 운영 상태 및 요금은 이용할 건물이나 점포에 확인하세요.'],
+ ['먹거리와 약재를 살 때 무엇을 확인하나요?', '판매 품목은 점포와 시기에 따라 달라집니다. 가격, 중량, 원재료, 알레르기 표시, 보관 방법과 상품 분류를 판매자에게 확인하세요. 이 가이드는 특정 식품의 적합성이나 약재의 효능, 해외 반입 가능 여부를 보장하지 않습니다.']
 ];
-
-const attractionSchema = {
-  '@context': 'https://schema.org',
-  '@type': ['TouristAttraction', 'LocalBusiness'],
-  '@id': siteUrl ? `${siteUrl}#gyeongdong-market` : '#gyeongdong-market',
-  name: '경동시장',
-  alternateName: 'Gyeongdong Market',
-  description,
-  ...(siteUrl ? { url: siteUrl } : {}),
-  ...(imageUrl ? { image: imageUrl } : {}),
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '고산자로36길 3',
-    addressLocality: '동대문구',
-    addressRegion: '서울특별시',
-    postalCode: '02571',
-    addressCountry: 'KR'
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 37.578931981,
-    longitude: 127.03873337814
-  },
-  openingHoursSpecification: [{
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-    opens: '08:00',
-    closes: '18:00'
-  }],
-  isAccessibleForFree: true,
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.1',
-    bestRating: '5'
-  }
-};
-
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faq.map(([q, a]) => ({
-    '@type': 'Question',
-    name: q,
-    acceptedAnswer: { '@type': 'Answer', text: a }
-  }))
-};
+const attraction={'@context':'https://schema.org','@type':'TouristAttraction',name:'경동시장',alternateName:['Gyeongdong Market','Kyungdong Market'],description:'서울 동대문구의 농산물·약재 등 다양한 품목을 다루는 전통시장 권역.',address:{'@type':'PostalAddress',streetAddress:'고산자로36길 3',addressLocality:'동대문구',addressRegion:'서울특별시',postalCode:'02571',addressCountry:'KR'},geo:{'@type':'GeoCoordinates',latitude:37.57973,longitude:127.03854},hasMap:'https://maps.app.goo.gl/KijUQHBpiftHX1EG6'};
+const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:faq.map(([q,a])=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))};
 ---
-<BaseLayout title={pageTitle} description={description}>
-  <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify(attractionSchema)} />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  </Fragment>
-
-  <section class="hero">
-    <div class="hero-image" aria-hidden="true">
-      <img src="/images/gyeongdong-entrance.webp" alt="" width="1200" height="800" fetchpriority="high" />
-    </div>
-    <div class="hero-wash"></div>
-    <div class="shell hero-content">
-      <p class="hero-overline">서울 · 동대문구 · 제기동</p>
-      <h1 class="display">삶의 물건이 모여<br/><em>서울의 시간이 된 시장</em></h1>
-      <p class="hero-copy">경기 북부와 강원에서 들어온 농산물이 청량리 일대에 모이던 전후의 장터에서 출발해, 약재와 농수산물의 거대한 생활 유통지로 성장한 경동시장. 물건을 사는 곳을 넘어 서울 동쪽의 생활사를 읽는 장소입니다.</p>
-      <div class="hero-actions">
-        <a href="#story" class="primary">시장 이야기 읽기</a>
-        <a href="#visit" class="secondary">방문 정보 먼저 보기</a>
-      </div>
-    </div>
-    <div class="hero-facts shell">
-      <div><span>개설</span><strong>1960년 6월</strong></div>
-      <div><span>가까운 역</span><strong>1호선 제기동역</strong></div>
-      <div><span>성격</span><strong>전통시장 · 약재 · 농수산물</strong></div>
-      <div><span>권장 체류</span><strong>1시간 30분–3시간</strong></div>
-    </div>
-  </section>
-
-  <section class="section intro" id="story">
-    <div class="shell split-head">
-      <div>
-        <p class="section-kicker">시장 문화 기록</p>
-        <h2 class="display section-title">전쟁 뒤 빈터의 장사에서 서울의 큰 장터로</h2>
-      </div>
-      <div class="intro-text">
-        <p>6·25전쟁 이후 서울의 생활이 다시 움직이기 시작하던 시기, 옛 성동역과 청량리역을 통해 경기 북부와 강원도에서 들어온 농산물이 이 일대에 모였습니다. 운송된 물건을 바로 사고팔려는 사람들이 빈터에 자리를 잡으면서 자연 발생적인 장이 형성됐고, 1960년 6월 경동시장이 공식 개설됐습니다.</p>
-        <p>철도와 도매 유통의 힘을 바탕으로 시장은 채소·과일·곡물·건어물·육류 같은 생활 식재료와 한약재가 집중되는 대규모 전통시장으로 성장했습니다. 오늘날에는 인접한 서울약령시와 함께 ‘약재와 생활시장’이라는 독특한 지역 정체성을 이룹니다.</p>
-      </div>
-    </div>
-
-    <div class="shell story-grid">
-      <figure class="story-photo tall">
-        <img src="/images/gyeongdong-arcade.webp" alt="경동시장 아케이드 안을 오가는 시민들과 양쪽 점포" loading="lazy" />
-        <figcaption>재래시장의 밀도는 간판보다 사람과 물건의 흐름에서 드러납니다. <span>사진 © 서울특별시 미디어허브 / 김승아</span></figcaption>
-      </figure>
-      <div class="story-cards">
-        <article>
-          <span class="num">01</span>
-          <h3>철도가 만든 유통의 자리</h3>
-          <p>서울 동부의 철도 거점과 가까웠던 지리적 조건은 산지 물품이 모이는 데 큰 역할을 했습니다. 그래서 경동시장의 역사는 ‘관광용으로 만들어진 시장’보다 도시가 먹고사는 방식을 보여주는 생활시장에 가깝습니다.</p>
-        </article>
-        <article>
-          <span class="num">02</span>
-          <h3>약재 골목과 서울약령시</h3>
-          <p>시장 주변은 한약재 도·소매가 발달한 서울약령시 권역과 맞닿아 있습니다. 건조 약재와 차 재료, 인삼류가 밀집한 풍경은 다른 서울 전통시장과 구별되는 중요한 문화적 특징입니다.</p>
-        </article>
-        <article>
-          <span class="num">03</span>
-          <h3>옛 공간의 새로운 쓰임</h3>
-          <p>최근에는 오래된 극장과 시장 건물을 재해석한 문화 공간, 청년 상업 공간, 작은 도서·놀이 기능 등이 더해지며 전통 유통 공간과 새로운 방문 문화가 겹쳐지고 있습니다.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section market-texture">
-    <div class="shell texture-grid">
-      <div class="texture-copy">
-        <p class="section-kicker">무엇을 보게 될까</p>
-        <h2 class="display section-title">색보다 먼저 향과 소리가 기억에 남는 곳</h2>
-        <p class="section-lead">말린 약재의 향, 제철 농산물의 색, 손질하는 소리, 카트가 오가는 통로. 경동시장의 핵심은 특정 ‘인증샷’보다 생활 유통의 장면을 관찰하는 데 있습니다.</p>
-        <div class="texture-list">
-          <div><b>약재·건재</b><span>말린 뿌리·열매·차 재료 등 다양한 전통 식재료 문화</span></div>
-          <div><b>농산물</b><span>채소·과일·곡물 등 계절과 산지에 따라 달라지는 구성</span></div>
-          <div><b>수산·건어물</b><span>말린 해산물과 식재료가 만드는 전통 도매시장의 풍경</span></div>
-          <div><b>먹거리</b><span>국물 음식·분식·전·떡·반찬류 등 시장형 식사의 폭넓은 유형</span></div>
-        </div>
-      </div>
-      <figure class="texture-photo">
-        <img src="/images/gyeongdong-market-hall.webp" alt="채소와 식재료가 진열된 경동시장 실내 통로" loading="lazy" />
-        <figcaption>사진 © 서울특별시 미디어허브 / 김승아</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="section visit" id="visit">
-    <div class="shell">
-      <p class="section-kicker">방문 전 핵심 정보</p>
-      <h2 class="display section-title">현장에서 당황하지 않도록</h2>
-      <p class="section-lead">전통시장은 박물관처럼 모든 점포가 동일한 시간표로 움직이지 않습니다. 아래 정보는 공공 자료를 기준으로 정리하되, 변동성이 큰 항목은 범위와 확인 방법을 함께 적었습니다.</p>
-      <div class="info-grid">
-        <article class="info-card feature">
-          <span>운영</span><h3>대체로 08:00–18:00</h3>
-          <p>서울시 2026년 소개 자료 기준. 점포마다 영업시간과 휴무가 다르며, 격주 일요일 휴무 안내도 있어 특정 점포 이용이 목적이면 개별 확인이 필요합니다.</p>
-        </article>
-        <article class="info-card"><span>입장·비용</span><h3>시장 입장 무료</h3><p>시장 보행과 관람 자체에는 입장권이 없습니다. 식사·상품·체험 등 개인 소비만 별도입니다.</p></article>
-        <article class="info-card"><span>추천 시간대</span><h3>오전 중반–오후 이른 시간</h3><p>상점이 충분히 문을 연 뒤이면서 장보기 흐름을 관찰하기 좋은 시간대입니다. 폐점 직전에는 일부 점포가 먼저 정리할 수 있습니다.</p></article>
-        <article class="info-card"><span>체류 시간</span><h3>1시간 30분–3시간</h3><p>시장 중심만 보면 약 1시간 30분, 서울약령시와 인근 문화 공간까지 연결하면 반나절의 짧은 도시 산책으로 좋습니다.</p></article>
-        <article class="info-card"><span>외부 평점</span><h3>4.1 / 5</h3><p>외부 지도 서비스에 공개된 평점 기준이며 수시로 변할 수 있습니다. 본 사이트가 산정하거나 보증한 점수는 아닙니다.</p></article>
-        <article class="info-card"><span>결제 준비</span><h3>소액 결제 수단을 함께</h3><p>카드·간편결제 보급이 넓지만 전통시장 특성상 판매 형태가 다양합니다. 결제 가능 수단은 구매 전에 확인하세요.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section facilities">
-    <div class="shell">
-      <div class="split-head compact">
-        <div><p class="section-kicker">편의·생활 정보</p><h2 class="display section-title">화장실부터 충전까지</h2></div>
-        <p class="section-lead">특정 상호를 홍보하지 않고, 여행자가 실제로 필요한 시설의 ‘유형’과 확인 포인트만 안내합니다.</p>
-      </div>
-      <div class="facility-grid">
-        <article><span>화장실</span><h3>시장·공용시설 확인</h3><p>시장 건물과 주변 공용시설의 화장실을 이용할 수 있습니다. 건물·구역별 위치와 개방 시간이 달라 현장 안내 표지를 우선 확인하세요.</p></article>
-        <article><span>무장애</span><h3>구역별 조건 차이</h3><p>전통시장 골목은 폭·문턱·혼잡도가 일정하지 않습니다. 공공 무장애 데이터도 등록 시점에 따라 상충 표기가 있어 이동 보조가 필요하다면 최신 현장 정보를 확인하세요.</p></article>
-        <article><span>주차</span><h3>시장권 유료 주차</h3><p>고산자로 쪽에서 접근 가능한 시장권 주차 시설이 알려져 있습니다. 혼잡 시간대에는 대기할 수 있고 요금도 바뀔 수 있어 대중교통이 더 안정적입니다.</p></article>
-        <article><span>식사</span><h3>시장형 식당·간식</h3><p>국밥류, 분식, 전, 떡, 반찬, 차·음료 등 다양한 유형을 찾을 수 있습니다. 위생 표시·알레르기 정보·가격을 확인한 뒤 선택하세요.</p></article>
-        <article><span>숙박</span><h3>도심 숙박 유형 다양</h3><p>청량리·동대문권에는 비즈니스호텔, 소형 숙박시설, 레지던스형 숙소 등이 있습니다. 대중교통 접근성·야간 동선·체크인 시간을 기준으로 비교하세요.</p></article>
-        <article><span>생필품</span><h3>편의점·슈퍼·대형 유통시설</h3><p>시장 주변 생활권에서 음료, 위생용품, 우산, 보조배터리 같은 여행 소모품을 구하기 쉽습니다. 특정 업체는 추천하지 않습니다.</p></article>
-        <article><span>차량 에너지</span><h3>주유·전기차 충전</h3><p>도심 간선도로 주변 주유소와 공공·민간 전기차 충전시설을 이용할 수 있습니다. 충전 규격·운영 여부·주차 조건은 지도·공공 충전망에서 실시간 확인하세요.</p></article>
-        <article><span>짐과 보행</span><h3>가벼운 가방 권장</h3><p>통로가 붐비고 손수레 이동이 잦아 큰 캐리어는 불편할 수 있습니다. 이동 동선이 긴 날에는 역세권 보관시설 유형을 먼저 확인하는 편이 좋습니다.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section transport" id="transport">
-    <div class="shell">
-      <p class="section-kicker">상세 교통</p>
-      <h2 class="display section-title">서울의 철도망을 타고 시장으로</h2>
-      <div class="transport-layout">
-        <div class="route-main">
-          <article><span class="route-icon">1</span><div><h3>지하철</h3><p><b>1호선 제기동역</b>에서 시장까지 도보 접근이 가장 단순합니다. 서울시 관광 안내에는 2번 출구 기준 약 273m로 소개됩니다. 2호선 용두역에서도 도보 연결이 가능하지만 처음 방문한다면 제기동역이 이해하기 쉽습니다.</p></div></article>
-          <article><span class="route-icon">공</span><div><h3>인천국제공항에서</h3><p>공항철도로 서울역까지 이동한 뒤 <b>지하철 1호선으로 환승해 제기동역</b>으로 오는 경로가 환승 구조를 이해하기 쉽습니다. 공항버스 노선은 개편될 수 있으므로 출발 당일 공식 교통정보에서 청량리·동대문권 운행 여부를 확인하세요.</p></div></article>
-          <article><span class="route-icon">김</span><div><h3>김포공항에서</h3><p>공항철도로 서울역에 이동해 1호선으로 환승하거나, 도시철도를 이용해 종로권에서 1호선으로 갈아타는 방식이 일반적입니다. 수하물이 많다면 환승 횟수와 엘리베이터 동선을 함께 비교하세요.</p></div></article>
-          <article><span class="route-icon">버</span><div><h3>시내버스</h3><p><b>동대문구청·용두동주민센터</b>, <b>제기동역·서울약령시</b> 일대 정류장을 활용할 수 있습니다. 버스 번호는 개편 가능성이 있으므로 서울 대중교통 실시간 정보에서 목적지 ‘경동시장’을 기준으로 확인하는 것이 가장 정확합니다.</p></div></article>
-          <article><span class="route-icon">택</span><div><h3>택시</h3><p>기사에게 <b>“경동시장, 서울 동대문구 고산자로36길 3”</b>을 보여주면 됩니다. 시장 주변은 장보기 차량과 보행자가 많아 승하차 위치가 달라질 수 있습니다. 혼잡 시간대에는 큰 도로에서 내려 짧게 걷는 편이 빠를 수 있습니다.</p></div></article>
-        </div>
-        <aside class="route-note">
-          <h3>운전해서 온다면</h3>
-          <p>서울 도심 전통시장 권역은 골목 진입보다 <b>고산자로 같은 큰 도로에서 주차장 진입 방향을 확인</b>하는 것이 안전합니다.</p>
-          <ul><li>시장권 유료 주차 가능</li><li>주말·장보기 시간 혼잡 예상</li><li>주차 요금·운영시간은 현장 우선</li><li>보행자·손수레 통행에 유의</li></ul>
-          <p class="minor">정확한 주차 잔여면과 실시간 교통은 출발 직전 공공 교통정보 또는 지도 서비스에서 확인하세요.</p>
-        </aside>
-      </div>
-    </div>
-  </section>
-
-  <section class="section map-section" id="map">
-    <div class="shell map-grid">
-      <div class="map-copy">
-        <p class="section-kicker">위치</p>
-        <h2 class="display section-title">경동시장 길찾기</h2>
-        <p><b>서울특별시 동대문구 고산자로36길 3</b><br/>제기동역에서 시장권으로 진입하면 아케이드와 상가동이 여러 방향으로 이어집니다. 첫 방문이라면 한 지점을 찍고 도착한 뒤 현장 안내판을 따라 구역을 나누어 보는 방식이 편합니다.</p>
-        <p class="map-help">지도는 Google의 외부 서비스입니다. 지도 로드 시 Google의 개인정보 처리 기준이 적용될 수 있습니다.</p>
-      </div>
-      <div class="map-frame">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m5!3m3!1m2!1s0x357cbca84703bd5f%3A0xab3727d4d386ab3d!2z5Lqs5Lic5biC5Zy6!5e1!3m2!1sko!2skr!4v1787535264291!5m2!1sko!2skr&amp;hl=ko" width="600" height="450" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="경동시장 Google 지도"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <section class="section food-section" id="food">
-    <div class="shell">
-      <p class="section-kicker">주변 먹거리 이해하기</p>
-      <h2 class="display section-title">상호보다 음식의 유형을 고르는 법</h2>
-      <p class="section-lead">비영리 안내 원칙에 따라 특정 점포를 순위화하거나 추천하지 않습니다. 대신 경동시장과 전통시장 권역에서 흔히 만날 수 있는 음식 유형과 선택 기준을 소개합니다.</p>
-      <div class="food-grid">
-        <article><b>따뜻한 한 끼</b><h3>국물·백반류</h3><p>시장 노동과 장보기 문화 속에서 발달한 빠르고 든든한 식사 유형입니다. 메뉴판 가격, 반찬 구성, 매운 정도를 확인하세요.</p></article>
-        <article><b>골목 간식</b><h3>분식·전·떡류</h3><p>짧게 쉬며 먹기 좋은 유형입니다. 여러 곳을 비교하고 먹을 만큼만 소량 구매하면 시장 산책과 잘 맞습니다.</p></article>
-        <article><b>시장 식재료</b><h3>반찬·건어물·차 재료</h3><p>즉석 식사보다 ‘서울의 식생활’을 관찰하기 좋은 품목입니다. 포장·보관법과 알레르기 유발 원재료를 확인하세요.</p></article>
-        <article><b>약령시 문화권</b><h3>전통 차·약재 기반 음료</h3><p>약재가 곧 의약품이라는 뜻은 아닙니다. 건강 효능을 과장한 설명보다 원재료와 섭취 주의사항을 확인하는 것이 중요합니다.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section nearby" id="nearby">
-    <div class="shell nearby-layout">
-      <div class="nearby-head">
-        <p class="section-kicker">주변 함께 보기</p>
-        <h2 class="display section-title">시장 하나가 아니라 하나의 생활문화 권역</h2>
-        <p>경동시장은 인접 전통시장과 약재 문화가 촘촘히 연결된 지역입니다. 상업 점포가 아닌 공공·문화적 관점에서 함께 이해하기 좋은 장소를 골랐습니다.</p>
-      </div>
-      <div class="nearby-list">
-        <article><span>도보권</span><h3>서울약령시</h3><p>한약재 유통과 전통 의약문화가 집적된 거리. 경동시장의 약재 풍경이 왜 이 지역에 발달했는지 공간적으로 이해할 수 있습니다.</p></article>
-        <article><span>도보권</span><h3>서울한방진흥센터</h3><p>전통 한방·약령시 문화를 전시와 체험으로 설명하는 공공 문화시설. 시장에서 본 재료와 역사적 맥락을 정리하기 좋습니다.</p></article>
-        <article><span>연결 산책</span><h3>청량리 전통시장 권역</h3><p>경동시장 주변 여러 시장이 연결되는 서울 동부의 생활 유통 지대. 관광지 하나보다 지역 시장 생태계를 보는 방식으로 접근할 수 있습니다.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section etiquette">
-    <div class="shell etiquette-grid">
-      <div>
-        <p class="section-kicker">좋은 방문자가 되는 법</p>
-        <h2 class="display section-title">시장은 누군가의 일터입니다</h2>
-      </div>
-      <div class="etiquette-items">
-        <p><b>사진은 먼저 묻기.</b> 상품과 통로는 촬영 가능해 보여도 상인이나 손님 얼굴을 가까이 찍을 때는 동의를 구하세요.</p>
-        <p><b>통로를 막지 않기.</b> 손수레와 물류 이동이 잦습니다. 사진을 찍거나 지도를 볼 때는 가장자리로 이동하세요.</p>
-        <p><b>가격은 표시와 대화를 기준으로.</b> 무리한 흥정보다 포장 단위·중량·가격을 정확히 확인하는 것이 서로에게 편합니다.</p>
-        <p><b>약재는 문화와 상품으로 이해하기.</b> 건강 관련 제품을 구매할 때는 질병 치료 효과를 임의로 기대하지 말고 필요한 경우 의료 전문가와 상의하세요.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section night-photo-section">
-    <div class="shell night-card">
-      <img src="/images/gyeongdong-night.jpg" alt="밤에 불이 켜진 경동시장 입구 간판" loading="lazy" />
-      <div><p class="section-kicker">도시 속 오래된 표지</p><h2 class="display">낮의 장터가 닫혀도, 시장은 동네의 기억으로 남습니다.</h2><p>경동시장을 제대로 본다는 것은 ‘무엇을 샀는가’보다 왜 이곳에 이런 물건과 사람들이 모였는지를 이해하는 일에 가깝습니다.</p><small>사진 © 서울특별시 미디어허브</small></div>
-    </div>
-  </section>
-
-  <section class="section faq" id="faq">
-    <div class="shell faq-layout">
-      <div class="faq-title"><p class="section-kicker">자주 묻는 질문</p><h2 class="display section-title">방문 전에 가장 많이 궁금한 것</h2></div>
-      <div class="faq-list">
-        {faq.map(([q,a], i) => <details open={i === 0}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}
-      </div>
-    </div>
-  </section>
-
-  <section class="section sources" id="sources">
-    <div class="shell sources-inner">
-      <div><p class="section-kicker">자료 검증 원칙</p><h2 class="display section-title">공개 자료를 대조해 작성했습니다</h2></div>
-      <div class="sources-copy">
-        <p>역사와 기본 방문 정보는 <b>서울특별시</b>, <b>동대문구</b>, <b>한국관광공사 대한민국 구석구석</b>, <b>서울관광재단 공식 관광안내</b> 등 공공·공신력 자료를 중심으로 교차 확인했습니다.</p>
-        <p>전통시장은 점포별 운영시간, 휴무, 주차요금, 편의시설 상태가 달라질 수 있습니다. 특히 운영시간과 무장애 항목은 공개 데이터의 등록 시점에 따라 차이가 확인되어, 본 사이트는 하나의 수치를 절대값으로 단정하지 않고 현장·최신 공식정보 재확인을 권합니다.</p>
-        <p class="source-links"><a href="https://korean.visitkorea.or.kr/" rel="noreferrer">한국관광공사 공개 관광정보</a><a href="https://www.seoul.go.kr/" rel="noreferrer">서울특별시 공개 정보</a><a href="https://www.ddm.go.kr/" rel="noreferrer">동대문구 공개 정보</a></p>
-      </div>
-    </div>
-  </section>
+<BaseLayout title="경동시장 서울 | 영업시간·휴무 확인, 제기동역 위치와 지도" description="서울 경동시장 독립 방문 안내. Google Maps와 Visit Seoul의 영업시간 차이, 휴무일, 제기동역 접근, 주소·지도와 점포별 확인 사항을 정리했습니다.">
+<Fragment slot="head"><script is:inline type="application/ld+json" set:html={JSON.stringify(attraction)} /><script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} /></Fragment>
+<section class="hero"><div class="hero-image"><img src="/images/market-2008-01.webp" alt="2008년 경동시장 광성상가 간판 앞의 사람들과 오토바이" width="1600" height="1200" fetchpriority="high" /></div><div class="hero-wash"></div><div class="shell hero-content"><p class="hero-overline">독립 방문 안내 · 서울 동대문구</p><h1 class="display">경동시장<br/><em>Gyeongdong Market</em></h1><p class="hero-copy">농산물과 약재, 생활 식재료가 모이는 서울의 전통시장. 목적 건물과 점포를 먼저 정하고, 영업시간과 휴무일을 확인하며 방문을 준비하세요.</p><div class="hero-actions"><a href="#visit" class="primary">영업시간·휴무 확인</a><a href="#map" class="secondary">주소와 지도 보기</a></div></div><div class="hero-facts shell"><div><span>지역</span><strong>서울 동대문구</strong></div><div><span>접근 안내</span><strong>1호선 제기동역</strong></div><div><span>운영 범위</span><strong>건물·점포별 확인</strong></div><div><span>정보 확인</span><strong>2026년 10월 20일</strong></div></div></section>
+<div class="shell photo-note">2008년 4월 21일 기록 사진 — <a href="https://commons.wikimedia.org/wiki/File:Korea-Seoul-Gyeongdong_Market-01.jpg">Gaël Chardon / Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>. 크기 조정·WebP 변환·반응형 자르기. 현재 입구·점포·영업 상태를 보여주는 사진이 아닙니다.</div>
+<section class="section intro" id="story"><div class="shell split-head"><div><p class="section-kicker">시장 이해하기</p><h2 class="display section-title">경동시장과 주변 시장권을 구분하기</h2></div><div class="intro-text"><p>Visit Seoul은 경동시장을 1960년 6월 개설된 농산물 중심 시장으로 소개하며, 오늘날 약재와 인삼·수산물 등 다양한 품목을 다루는 전통시장으로 설명합니다.</p><p>이 안내에서 ‘경동시장’은 하나의 매장이나 모든 점포가 같은 시간에 움직이는 시설을 뜻하지 않습니다. 시장 건물, 서울약령시 일대, 식당과 문화 공간은 목적지와 이용 조건을 각각 확인해야 합니다.</p></div></div><div class="shell story-grid"><figure class="story-photo"><img src="/images/market-2008-04.webp" alt="2008년 촬영한 상자와 자루 속 말린 노란 꽃과 붉은 열매" width="1600" height="1200" loading="lazy" /><figcaption>2008년 4월 21일 자료 사진 — <a href="https://commons.wikimedia.org/wiki/File:Korea-Seoul-Gyeongdong_Market-04.jpg">Gaël Chardon / Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>. 크기 조정·WebP 변환·반응형 자르기. 현재 재고, 상품 분류 또는 이용 적합성을 뜻하지 않습니다.</figcaption></figure><div class="story-cards"><article><span class="num">01</span><h3>상품을 확인하는 방문</h3><p>농산물·약재·수산물이라는 시장의 성격은 공공 관광자료의 설명입니다. 개별 품목의 재고와 판매 여부는 점포에서 확인하세요.</p></article><article><span class="num">02</span><h3>구역과 점포의 차이</h3><p>같은 시장 이름으로 안내되어도 건물과 출입구가 다를 수 있습니다. 상호, 건물명, 층과 출입구를 목적 점포에 확인하면 지도를 해석하는 데 도움이 됩니다.</p></article><article><span class="num">03</span><h3>사진은 과거의 기록</h3><p>이 페이지의 사진은 2008년 촬영한 기록입니다. 현재 배치, 보행 조건, 운영 여부나 야간 접근을 추정하는 근거로 사용하지 마세요.</p></article></div></div></section>
+<section class="section visit" id="visit"><div class="shell"><p class="section-kicker">방문 전 핵심 정보</p><h2 class="display section-title">시간표가 다를 때는 점포에 확인하세요</h2><p class="section-lead">2026년 10월 20일 확인. 아래 두 출처의 안내를 나란히 적되, 어느 것도 모든 점포의 영업을 보장하지 않습니다.</p><div class="info-grid"><article class="info-card feature"><span>Google Maps · 확인일 기준</span><h3>매일 09:00–18:00</h3><p>장소 listing의 일별 표기입니다. 공휴일이나 점포별 휴무를 빠짐없이 반영한다고 보장하지 않습니다.</p></article><article class="info-card"><span>Visit Seoul · 2026.09.10 수정</span><h3>08:00–18:00</h3><p>격주 일요일과 추석 휴무도 안내합니다. 어느 일요일인지 별도 확인하고, 목적 점포의 시간과 휴일을 물어보세요.</p></article><article class="info-card"><span>비용과 범위</span><h3>구매·시설별 확인</h3><p>전체 시장의 무료 입장이나 특정 요금을 보장하지 않습니다. 상품·식사·주차·체험 비용과 이용 구역을 각각 확인하세요.</p></article><article class="info-card"><span>지도 공개 평점</span><h3>4.1 / 5 · 11,071개</h3><p>2026년 10월 20일 Google Maps의 리뷰 수입니다. 제3자 평가이며 변동될 수 있고, 이 사이트의 평가가 아닙니다.</p></article><article class="info-card"><span>계획</span><h3>목적에 맞춰 여유 있게</h3><p>고정 관람 소요시간을 보장하지 않습니다. 구매 품목, 목적 공간의 운영시간, 이동과 귀가 계획에 맞춰 일정을 잡으세요.</p></article><article class="info-card"><span>결제</span><h3>구매 전 확인</h3><p>가격·중량·포장 단위와 결제 수단을 먼저 물어보세요. 특정 점포의 카드·현금·간편결제 지원을 보장하지 않습니다.</p></article></div></div></section>
+<section class="section facilities"><div class="shell"><p class="section-kicker">필요한 시설 확인</p><h2 class="display section-title">건물과 동선을 기준으로 준비하기</h2><p class="section-lead">Google Maps의 접근 가능한 입구 표시는 2026년 10월 20일의 제3자 listing 정보이며, 전체 시장의 무장애 이동을 실측한 결과가 아닙니다.</p><div class="facility-grid"><article><span>화장실·이동</span><h3>이용 건물에 문의</h3><p>화장실 위치와 개방, 문턱·경사·엘리베이터 등 필요한 조건을 목적 건물에 확인하세요. 표시 하나로 모든 골목과 층에 접근할 수 있다고 보장하지 않습니다.</p></article><article><span>주차</span><h3>운영자 안내 확인</h3><p>주차장 위치·입구·차량 제한·운영시간·요금과 할인 조건을 별도로 확인하세요. 시장 전체의 무료 주차나 자리를 보장하지 않습니다.</p></article><article><span>생활 편의</span><h3>필요 서비스를 미리 확인</h3><p>보관함, 숙소, 편의점, 주유·충전 시설은 시장의 공통 서비스가 아닙니다. 필요한 제공자의 위치와 운영 상태를 따로 확인하세요.</p></article><article><span>보행</span><h3>통행을 배려하기</h3><p>상품과 운반 작업을 방해하지 않는 곳에서 지도를 확인하세요. 큰 짐이나 이동 보조기구가 있다면 이용할 출입구와 동선을 미리 문의하세요.</p></article></div></div></section>
+<section class="section transport" id="transport"><div class="shell"><p class="section-kicker">대중교통과 도착</p><h2 class="display section-title">제기동역에서 목적 점포까지</h2><p class="section-lead">Visit Seoul은 지하철 1호선 제기동역 2번 출구를 접근 지점으로 안내합니다. 이 안내는 모든 출구의 현재 개방 상태나 엘리베이터 동선을 보장하지 않습니다.</p><p>출발지에서의 환승, 공항 이동, 버스 노선·운임·막차와 출구 운영은 <a href="https://www.seoulmetro.co.kr/">서울교통공사</a> 등 실제 교통 운영기관의 최신 안내로 확인하세요. 고정 도보 시간이나 버스·공항 이동 경로를 이 페이지에서 확정하지 않습니다.</p><p>택시나 차량을 이용하면 목적 건물과 합법적인 승하차 지점을 운전자에게 확인하세요. 지도 핀은 시장권의 위치 참고이며 차량 진입구나 도로 통행을 보장하는 표지가 아닙니다.</p></div></section>
+<section class="section map-section" id="map"><div class="shell"><p class="section-kicker">주소와 위치</p><h2 class="display section-title">서울 동대문구 고산자로36길 3</h2><p>우편번호 02571. Google Maps 확인 핀: <b>37.57973, 127.03854</b> (2026년 10월 20일). 목적 점포의 건물·층·출입구를 따로 확인하세요.</p><a class="map-button" href="https://maps.app.goo.gl/KijUQHBpiftHX1EG6" rel="noopener noreferrer">Google Maps에서 위치 열기</a><p class="map-help">선택하면 외부 지도 서비스로 이동합니다. 이 페이지는 Google 지도를 자동으로 불러오지 않습니다.</p></div></section>
+<section class="section food-section" id="food"><div class="shell"><p class="section-kicker">장보기와 먹거리</p><h2 class="display section-title">상품별 정보를 먼저 확인하세요</h2><p>공공 관광자료는 농산물·수산물·약재 등 시장의 다양한 품목을 소개합니다. 개별 음식이나 상품의 재고, 가격과 적합성은 점포별로 다릅니다. 원재료, 알레르기 표시, 보관 방법, 포장 단위와 상품 분류를 확인한 뒤 선택하세요.</p><p>이 사이트는 약재의 효능이나 특정 식품의 적합성을 보장하지 않습니다. 해외 반입은 상품 종류와 도착지 규정에 따라 달라지므로 구매 전에 해당 국가의 세관·검역기관 안내를 확인하세요. 특정 점포나 상품을 추천·판매하지 않습니다.</p></div></section>
+<section class="section nearby" id="nearby"><div class="shell"><p class="section-kicker">주변 권역</p><h2 class="display section-title">시장의 시간과 문화 공간의 시간은 다릅니다</h2><p>Visit Seoul은 경동시장과 인삼·약재 상권의 관계를 소개합니다. 서울약령시 일대나 서울한방진흥센터 등을 별도 일정 후보로 검토한다면 주소와 입구, 운영일·전시·체험·예약 조건을 각 운영자의 안내에서 확인해야 합니다. 이 페이지는 그 시설의 현재 주소나 운영을 확인한 안내가 아닙니다.</p><p>이름이 함께 소개된다는 이유로 도보 연결, 모든 통로의 개방, 같은 티켓이나 동일한 시간표가 적용된다고 가정하지 마세요. 이 페이지는 주변 시설의 오늘 운영을 확인한 목록이 아닙니다.</p></div></section>
+<section class="section etiquette"><div class="shell"><p class="section-kicker">방문 예절</p><h2 class="display section-title">시장은 누군가의 일터입니다</h2><p>사람을 가까이 촬영하기 전에 허락을 구하고, 상품과 운반 동선을 막지 마세요. 가격과 중량은 표시와 대화로 확인하고 현장 안내를 따르세요.</p></div></section>
+<section class="section faq" id="faq"><div class="shell faq-layout"><div class="faq-title"><p class="section-kicker">자주 묻는 질문</p><h2 class="display section-title">방문 전 확인할 내용</h2></div><div class="faq-list">{faq.map(([q,a])=><details><summary>{q}<span>+</span></summary><p>{a}</p></details>)}</div></div></section>
+<section class="section sources" id="sources"><div class="shell"><p class="section-kicker">확인일 2026.10.20</p><h2 class="display section-title">출처와 정보 범위</h2><p>독립 안내이며 시장 운영자나 정부기관의 공식 사이트가 아닙니다. 공개 자료의 시간 차이는 그대로 표시하고 점포별 확인을 권합니다.</p><ul class="source-list"><li><a href="https://korean.visitseoul.net/shopping/kyungdong-market/KOP3rjtd6">Visit Seoul 경동시장</a> — 2026년 9월 10일 수정 안내: 시장 성격·1960년 개설·주소·역 접근·운영시간·휴무.</li><li><a href="https://maps.app.goo.gl/KijUQHBpiftHX1EG6">Google Maps 경동시장</a> — 2026년 10월 20일 확인한 제3자 위치·평점·시간 표기.</li><li>역사 사진의 작가·원본·라이선스는 각 사진 아래에 표시했습니다. 촬영일과 현재 확인일을 구분하세요.</li></ul></div></section>
 </BaseLayout>
 
 <style>
+
 .section{overflow:clip}
 .hero{position:relative;min-height:850px;color:white;display:flex;align-items:flex-end;overflow:hidden;background:#17211d}.hero-image,.hero-wash{position:absolute;inset:0}.hero-image img{width:100%;height:100%;object-fit:cover;object-position:center 45%;filter:saturate(.85)}.hero-wash{background:linear-gradient(90deg,rgba(16,24,20,.88) 0%,rgba(16,24,20,.58) 48%,rgba(16,24,20,.14) 78%),linear-gradient(0deg,rgba(16,24,20,.86) 0%,transparent 48%)}.hero-content{position:relative;z-index:2;padding:10rem 0 12rem}.hero-overline{font-size:.82rem;font-weight:800;letter-spacing:.16em;margin:0 0 1.5rem;color:#e7cf9f}.hero h1{font-size:clamp(3.4rem,8.4vw,8.2rem);max-width:12ch;margin:0}.hero h1 em{color:#e2bd72;font-style:normal}.hero-copy{font-size:clamp(1rem,1.8vw,1.24rem);max-width:42rem;color:#e2e7e3;margin:2rem 0 2.2rem}.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap}.hero-actions a{padding:.85rem 1.15rem;border-radius:999px;font-size:.88rem;font-weight:800}.hero-actions .primary{background:#b73b2e}.hero-actions .secondary{border:1px solid rgba(255,255,255,.55);background:rgba(0,0,0,.12)}.hero-facts{position:absolute;z-index:3;bottom:0;left:50%;transform:translateX(-50%);display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.3);padding:1.25rem 0 1.45rem}.hero-facts div{display:grid;gap:.15rem;border-right:1px solid rgba(255,255,255,.22);padding:0 1.4rem}.hero-facts div:first-child{padding-left:0}.hero-facts div:last-child{border-right:0}.hero-facts span{font-size:.7rem;color:#c9d0cb}.hero-facts strong{font-size:.92rem}
 .split-head{display:grid;grid-template-columns:1.05fr .95fr;gap:7vw;align-items:start;min-height:260px;contain:layout style}.split-head>div{min-width:0;max-width:100%}.split-head.compact{align-items:end}.intro-text{font-size:1.06rem;color:#46514c;padding-top:2.4rem;padding-inline:.2rem;min-width:0;max-width:100%}.intro-text p:first-child{font-size:1.2rem;color:#26332d}.story-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:2.2rem;margin-top:5rem}.story-photo{margin:0;background:#ddd;overflow:hidden}.story-photo img{width:100%;height:720px;object-fit:cover}.story-photo figcaption,.texture-photo figcaption{font-size:.73rem;color:#64706a;margin-top:.7rem}.story-photo figcaption span{display:block}.story-cards{border-top:1px solid rgba(23,33,29,.18)}.story-cards article{position:relative;padding:2rem 0 2.2rem 4.4rem;border-bottom:1px solid rgba(23,33,29,.18)}.story-cards .num{position:absolute;left:0;top:2.3rem;font-family:Georgia,serif;color:#b73b2e}.story-cards h3{font-family:"Noto Serif KR",serif;font-size:1.45rem;margin:.1rem 0 .8rem}.story-cards p{color:#56615c;margin:0}
@@ -311,4 +46,6 @@ const faqSchema = {
 .sources{background:#e7ddca}.sources-inner{display:grid;grid-template-columns:.8fr 1.2fr;gap:5rem;min-height:240px;align-items:start;contain:layout style}.sources-inner>*{min-width:0;max-width:100%}.sources-copy{color:#536059;padding-inline:.2rem}.source-links{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem}.source-links a{font-size:.8rem;font-weight:800;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:900px){.hero{min-height:790px}.hero-content{padding:8rem 0 11rem}.hero-facts{grid-template-columns:1fr 1fr}.hero-facts div{padding:.45rem .8rem}.hero-facts div:nth-child(2){border-right:0}.split-head,.story-grid,.texture-grid,.transport-layout,.map-grid,.nearby-layout,.etiquette-grid,.faq-layout,.sources-inner{grid-template-columns:1fr}.story-photo img{height:520px}.info-grid{grid-template-columns:1fr 1fr}.facility-grid,.food-grid{grid-template-columns:1fr 1fr}.route-note,.faq-title{position:static}.map-frame{height:440px}.night-card{grid-template-columns:1fr}.night-card img{min-height:360px;max-height:520px}.nearby-layout,.etiquette-grid,.faq-layout,.sources-inner{gap:2.5rem}}
 @media(max-width:560px){.hero h1{font-size:3.15rem}.hero-copy{font-size:.96rem}.hero-facts{font-size:.8rem}.hero-facts div{min-height:52px}.info-grid,.facility-grid,.food-grid{grid-template-columns:1fr}.facility-grid{border-left:0}.facility-grid article{border-left:1px solid rgba(23,33,29,.18)}.texture-list div{grid-template-columns:1fr;gap:.2rem}.story-cards article{padding-left:3rem}.map-frame{height:390px;border-width:6px}.night-card>div{padding:2rem 1.3rem}}
+
+.hero h1{font-size:clamp(2.6rem,6vw,6rem);max-width:18ch}.hero h1 em{font-size:.7em}.hero-content{padding-bottom:12rem}.hero-image img{filter:none}.hero-facts{gap:.7rem}.map-button{display:inline-flex;align-items:center;min-height:48px;padding:.8rem 1.3rem;background:#235d48;color:white;border-radius:2rem;font-weight:800}.source-list{list-style:disc;padding-left:1.3rem;line-height:1.9}.source-list a,.transport a{text-decoration:underline;text-underline-offset:3px}.faq-list summary{min-height:44px;align-items:center}.story-photo img{height:auto}.photo-note{background:#f5f0e4}.food-section p{max-width:75ch;line-height:1.9}@media(max-width:560px){.hero{min-height:760px}.hero-content{padding:4rem 0 15rem}.hero h1{font-size:2.6rem}.hero-facts strong{font-size:.8rem}.hero-facts div{padding:.4rem}.hero-facts{padding-block:1rem}.hero-facts div:nth-child(3){padding-left:0;}}
 </style>

@@ -42,7 +42,5 @@ for (const file of files) {
 }
 
 const hasSitemap = files.some((f) => isPublicArtifact(f) && /sitemap.*\.xml$/i.test(f));
-if (!process.env.SITE_URL?.trim() && hasSitemap) {
-  throw new Error('SITE_URL이 비어 있는데 sitemap이 생성되었습니다.');
-}
+if (!hasSitemap) throw new Error('sitemap 누락');
 console.log(`빌드 검증 완료: 공개 텍스트 산출물 ${checkedFiles}개 파일, 금지 문자열 없음.`);
