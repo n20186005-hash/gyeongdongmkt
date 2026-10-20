@@ -1,14 +1,1 @@
-{
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "gyeongdong-market-guide",
-  "main": "@astrojs/cloudflare/entrypoints/server",
-  "compatibility_date": "2026-07-15",
-  "compatibility_flags": ["nodejs_compat"],
-  "assets": {
-    "directory": "./dist",
-    "binding": "ASSETS"
-  },
-  "observability": {
-    "enabled": true
-  }
-}
+{"$schema":"node_modules/wrangler/config-schema.json","name":"gyeongdongmkt","main":"src/worker.ts","compatibility_date":"2026-08-01","assets":{"directory":"./dist","binding":"ASSETS","run_worker_first":true,"not_found_handling":"404-page"}}

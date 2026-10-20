@@ -1,83 +1,19 @@
-# 경동시장 관광정보 가이드
+# 경동시장 서울 관광정보 가이드
 
-서울특별시 동대문구 경동시장의 역사·시장문화와 실용 방문 정보를 정리한 독립 비영리 단일 관광지 사이트입니다. 디자인은 전통시장의 간판 구조, 약재 상자의 종이 질감, 짙은 녹색·적갈색 계열을 모티프로 제작했습니다.
+한국어 독립 방문 안내입니다. 시장이나 정부·관광기관의 공식 사이트가 아니며 예약·판매 기능이 없습니다.
 
-## 기술 구성
+## 실행과 구조
 
-- Astro 7.2.3
-- Tailwind CSS 4.3.3 (`@tailwindcss/vite`)
-- TypeScript 6.0.3
-- `@astrojs/check` 0.9.10
-- `@astrojs/cloudflare` 14.2.2
-- `@astrojs/sitemap` 3.7.3
-- Wrangler 4.124.0
-- pnpm 11.22.0
-- Node.js 24.19.0 LTS
-- Cloudflare Workers
+Node 24.19.0, pnpm 11.22.0. `pnpm install --frozen-lockfile`, `pnpm check`, `pnpm build`로 설치·검사·빌드합니다. Astro는 모든 안내·법적 페이지를 정적 HTML로 생성합니다. 기존 `/`, `/privacy/`, `/terms/`, `/cookies/`를 유지하며 실제 404 페이지를 추가합니다. 한국어 외의 페이지를 새로 만들지 않습니다.
 
-모든 직접 의존성은 `package.json`에 정확한 버전으로 고정합니다. pnpm 11은 의존성 빌드 스크립트를 명시적으로 승인해야 하므로 `pnpm-workspace.yaml`을 사용하며, 단일 패키지 조건에 맞게 `packages: ['.']`을 포함하고 `esbuild`, `sharp`, `workerd`만 빌드를 허용합니다.
+정규 도메인은 `https://gyeongdongmkt.com/`입니다. 필수 도메인이 빌드 환경변수 누락으로 사라지지 않도록 설정에 명시합니다. canonical·OG·한국어 alternate·홈페이지 sitemap이 생성됩니다. 기존에 추적하지 않던 `dist/`는 계속 빌드 결과로만 유지하고 모든 원본·공개 자산을 Git에 저장합니다.
 
-## 시작하기
+Cloudflare Worker 프로젝트는 `gyeongdongmkt`입니다. ASSETS `run_worker_first`로 HTTP/www를 경로·쿼리 보존 301 처리하고 없는 주소에 실제 404와 noindex를 적용합니다. `pnpm deploy`는 빌드 후 배포하며 게시 권한자가 별도로 실행합니다.
 
-```bash
-corepack enable
-pnpm install --frozen-lockfile
-pnpm check
-pnpm build
-```
+## 편집과 사진
 
-## 도메인 설정
+2026년 10월 20일 확인한 Maps 시간과 Visit Seoul의 운영·휴무 안내를 구분합니다. 점포·건물·문화 공간 전체에 하나의 일정이나 무료·시설 보장을 적용하지 않습니다. 요금·시간·평가는 schema에서 제거합니다. FAQ는 화면과 JSON-LD가 같은 배열에서 생성됩니다. [SOURCES.md](SOURCES.md)에 출처와 역사 사진의 작가·CC BY-SA 2.0 조건, 이전 사진의 교체 사유를 기록합니다.
 
-도메인은 **한 곳**에서만 설정합니다. 배포 또는 빌드 환경의 `SITE_URL` 값을 실제 HTTPS 주소로 지정하세요.
+## 개인정보
 
-```bash
-SITE_URL=https://실제-도메인.kr pnpm build
-```
-
-`SITE_URL`이 비어 있어도 빌드는 정상적으로 완료됩니다. 이 경우:
-
-- canonical 절대 URL은 출력하지 않습니다.
-- Open Graph의 `og:url`은 생략합니다.
-- JSON-LD의 절대 `url`/`image` 항목은 생략합니다.
-- `@astrojs/sitemap`은 활성화하지 않으므로 잘못된 임시 도메인의 sitemap이 생성되지 않습니다.
-
-실제 도메인을 설정하면 canonical, Open Graph URL, JSON-LD URL과 sitemap이 모두 `Astro.site`에서 파생됩니다.
-
-## Cloudflare Workers
-
-```bash
-pnpm build
-pnpm deploy
-```
-
-`wrangler.jsonc`는 Astro Cloudflare Worker 엔트리포인트를 사용합니다. `compatibility_date`는 배포 재현성을 위해 프로젝트 기술 설정으로 고정했습니다.
-
-## 개인정보·쿠키
-
-- `/privacy/` 개인정보처리방침
-- `/terms/` 이용약관
-- `/cookies/` 쿠키 설정
-
-세 문서는 팝업이 아닌 독립 페이지입니다. Google 애널리틱스 4(`G-HXM22WWPKP`)는 사용자가 `/cookies/`에서 분석 기능에 동의한 경우에만 동적으로 로드됩니다. 맞춤형 광고용 마케팅 쿠키는 사용하지 않습니다.
-
-## 빌드 후 자체 검증
-
-`pnpm build`는 Astro 빌드 뒤 `scripts/verify-build.mjs`를 자동 실행하여 다음을 검사합니다.
-
-- `example.com`, `localhost`, `chrome-extension://` 금지 문자열
-- `SITE_URL` 미설정 상태에서 sitemap이 잘못 생성되는지 여부
-- sitemap이 있을 경우 모든 `<loc>`가 HTTPS 절대 URL인지 여부
-- sitemap에 임의의 `<lastmod>`가 들어가지 않았는지 여부
-
-권장 최종 검증:
-
-```bash
-rm -rf node_modules
-CI=1 corepack pnpm install --frozen-lockfile
-pnpm check
-pnpm build
-```
-
-## 사진 저작권
-
-사진은 프로젝트에 로컬 포함되어 외부 이미지 서버에 의존하지 않습니다. 사진의 소유권과 저작권은 원 촬영자 및 권리자에게 있으며, 출처와 편집 원칙은 `SOURCES.md`를 참고하세요.
+지도는 외부 링크이며 자동 iframe이 없습니다. Google Analytics는 `/cookies/`의 명시적 허용 후에만 로드합니다. 새 키 `gyeongdongmkt_cookie_preferences`는 이전 허용을 가져오지 않습니다. 기존 허용을 거부할 때 저장이 실패하면 즉시 런타임을 끄고 가능한 경우 세션 거부를 기록하여 같은 탭의 이동·새로고침에 유지합니다. 자동 새로고침하지 않으며 저장 실패 범위를 한국어로 알립니다. 계정·예약·문의·메일 창구나 사용하지 않는 환경설정 기능은 없습니다.

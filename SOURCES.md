@@ -1,44 +1,26 @@
-# 자료 출처 및 편집 원칙
+# 자료와 이미지 출처
 
-본 프로젝트는 독립 비영리 관광정보 안내를 목적으로 하며, 특정 상점 또는 상업 서비스를 순위화하거나 추천하지 않습니다. 공개 정보가 서로 다를 때에는 최신 공공자료를 우선하되, 변동 가능성을 본문에 명시합니다.
+확인일: 2026년 10월 20일. 이 사이트는 독립 안내이며 시장·정부·관광기관을 대리하지 않습니다.
 
-## 경동시장 기본 정보·역사
+## 방문 정보
 
-- 서울특별시 「내 손안에 서울」, 2026 서울에디션25 경동시장 소개  
-  https://mediahub.seoul.go.kr/archives/2019055
-- 동대문구 기억여행, 「경동시장」  
-  https://memory.ddm.go.kr/items/show/24?index=4&tour=10
-- 동대문구 청량리 일대 전통시장 안내, 「경동시장」  
-  https://www.ddm.go.kr/site/cheongnyangni/market01.html
-- 한국관광공사 대한민국 구석구석, 「경동시장」  
-  https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=e78e350f-c73e-43d7-a4ec-d8572d02ff13
-- 한국관광공사 K-관광마켓 안내, 「경동시장」  
-  https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=6f9c69df-69e8-4dec-ba27-c31789310df3
-- 서울 공식 관광안내(Visit Seoul), 경동시장 안내 — 주소·대중교통·운영정보 교차 확인
+- [Visit Seoul 경동시장](https://korean.visitseoul.net/shopping/kyungdong-market/KOP3rjtd6), 수정일 2026.09.10: 1960년 6월 개설, 품목과 시장 성격, 고산자로36길 3 주소, 제기동역 2번 출구, 08:00–18:00 및 격주 일요일·추석 휴무. 모든 점포의 공통 시간표나 접근성 보장이 아닙니다.
+- [Google Maps 장소](https://maps.app.goo.gl/KijUQHBpiftHX1EG6), 확인일 2026.10.20: 09:00–18:00 일별 표기와 위치·공개 평가. Visit Seoul과 차이를 본문에 함께 표시합니다. 좌표는 37.57973, 127.03854이며 방문 출입구를 뜻하지 않습니다.
+- [서울교통공사](https://www.seoulmetro.co.kr/): 실제 출구와 환승·운행 확인을 위한 공식 안내 연결. 이 사이트는 고정 소요시간·공항 환승·버스 번호·운임·전 구간 무장애 이동을 보장하지 않습니다.
 
-## 주변 문화권
+요금, 무료 입장, 주차·화장실·엘리베이터의 운영 상태, 상품 재고·효능, 문화시설의 오늘 일정은 확인되지 않았습니다. 개별 운영자의 확인이 필요합니다. 근처 시설 후보를 함께 소개해도 통로·티켓·시간이 연결된다는 뜻이 아닙니다.
 
-- 동대문구 기억여행, 서울한방진흥센터·서울약령시한의약박물관 및 제기동 지역 자료  
-  https://memory.ddm.go.kr/
+## 현재 사진
 
-## 지도·위치
+두 사진의 작가는 **Gaël Chardon**, 촬영일은 **2008년 4월 21일**입니다. 현재 모습이나 점포 운영을 보여주는 사진이 아닙니다.
 
-- Google Maps 경동시장 위치: 사용자가 제공한 지도 링크 및 임베드 좌표 기준
-- 주소: 서울특별시 동대문구 고산자로36길 3, 02571
-- 좌표: 37.578931981, 127.03873337814
+| 현재 파일 | 원본과 출처 | 라이선스·변경 |
+| --- | --- | --- |
+| `public/images/market-2008-01.webp` | [Commons 원본 01](https://commons.wikimedia.org/wiki/File:Korea-Seoul-Gyeongdong_Market-01.jpg), [작가 Flickr IMG_8650](https://www.flickr.com/photos/26294314@N00/2431054948) | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), 너비 1600으로 조정·WebP 변환·반응형 자르기 |
+| `public/images/market-2008-04.webp` | [Commons 원본 04](https://commons.wikimedia.org/wiki/File:Korea-Seoul-Gyeongdong_Market-04.jpg), [작가 Flickr IMG_8647](https://www.flickr.com/photos/26294314@N00/2431053708) | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), 너비 1600으로 조정·WebP 변환·반응형 자르기 |
 
-## 이미지
+Commons 두 페이지는 Flickr 업로드 당시 라이선스 검토가 완료되었다고 기록합니다. 사람이 읽을 수 있는 설명·원본·촬영일·라이선스·경고 항목을 확인했으며, 확인 시 삭제 제안이나 별도 권리 분쟁 표시는 관찰되지 않았습니다. 원본 픽셀을 확인해 변환했으며 저작권 이전이나 작가의 사이트 지지를 뜻하지 않습니다. 변환물은 같은 CC BY-SA 2.0 조건을 따릅니다. 작가·원본·라이선스·촬영일·변경 사항은 화면에도 표시됩니다.
 
-이미지 파일은 외부 핫링크 대신 프로젝트의 `public/images/`에 로컬 저장합니다. 저작권은 각 원 촬영자 및 권리자에게 있습니다.
+## 이전 사진의 처리
 
-- `gyeongdong-entrance.webp` — 서울특별시 미디어허브, 시민기자 김승아, 경동시장 입구
-- `gyeongdong-arcade.webp` — 서울특별시 미디어허브, 시민기자 김승아, 시장 아케이드
-- `gyeongdong-market-hall.webp` — 서울특별시 미디어허브, 시민기자 김승아, 시장 내부
-- `gyeongdong-night.jpg` — 서울특별시 미디어허브, 경동시장 야간 전경
-
-## 변동성이 큰 정보 처리
-
-- 영업시간: 서울시 최신 소개 자료의 08:00–18:00 안내를 기준으로 하되, 한국관광공사·서울 관광 자료의 표기와 차이가 있어 ‘점포별 상이’ 및 휴무 재확인 문구를 함께 표시합니다.
-- 무장애 정보: 한국관광공사 데이터에서 등록 항목이 서로 다르게 나타나는 사례가 있어 특정 시설의 존재를 단정하지 않고 최신 현장·공공 안내 확인을 권합니다.
-- 평점: 외부 지도 서비스 공개 평점 4.1/5를 구조화 데이터 요구사항에 따라 표시하되, 리뷰 수는 쉽게 변하므로 고정하지 않습니다.
-- 주차요금·버스 번호·공항버스 노선: 변경 가능성이 높아 고정 수치 또는 특정 노선을 과도하게 단정하지 않습니다.
+기존 `gyeongdong-entrance.webp`, `gyeongdong-arcade.webp`, `gyeongdong-market-hall.webp`에는 서울시 미디어허브·시민기자 **김승아**의 출처가, `gyeongdong-night.jpg`에는 서울시 미디어허브 출처가 기록되어 있었습니다. [기존 인용 기사](https://mediahub.seoul.go.kr/archives/2019055)는 2026.08.18 시민기자 기사이며 사진 저작권 표시가 있지만 이 사이트의 복제·변형을 명확히 허용하는 라이선스는 확인되지 않았습니다. 권리 침해라는 결론을 내린 것은 아니며, 재사용 권한을 확인하지 못해 네 파일과 화면·OG 참조를 현재 공개 트리에서 제거했습니다. 알려진 작가·출처 기록은 여기 남깁니다.
